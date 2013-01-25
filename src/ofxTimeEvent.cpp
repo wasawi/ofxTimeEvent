@@ -46,60 +46,67 @@ void ofxTimeEvent::update()
     }
 }
 
-void ofxTimeEvent::registerSec( int sec )
+void ofxTimeEvent::registerSec ( const int& _id, const int& sec )
 {
     ofxTimeEventData dt;
     dt.filter = 1;
+    dt._id = _id;
     dt.second = sec;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerMin ( int min )
+void ofxTimeEvent::registerMin ( const int& _id, const int& min )
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 2;
     dt.minutes = min;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerMinSec( int min, int sec)
+void ofxTimeEvent::registerMinSec( const int& _id, const int& min, const int& sec)
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 3;
     dt.minutes = min;
     dt.second = sec;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerHour ( int hour )
+void ofxTimeEvent::registerHour ( const int& _id, const int& hour )
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 4;
     dt.hour = hour;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerHourSec( int hour, int sec)
+void ofxTimeEvent::registerHourSec( const int& _id, const int& hour, const int& sec)
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 5;
     dt.hour = hour;
     dt.second = sec;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerHourMin( int hour, int min)
+void ofxTimeEvent::registerHourMin( const int& _id, const int& hour, const int& min)
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 6;
     dt.hour = hour;
     dt.minutes = min;
     registerTime(dt);
 }
 
-void ofxTimeEvent::registerHourMinSec( int hour, int min, int sec)
+void ofxTimeEvent::registerHourMinSec( const int& _id, const int& hour, const int& min, const int& sec)
 {
     ofxTimeEventData dt;
+    dt._id = _id;
     dt.filter = 7;
     dt.hour = hour;
     dt.minutes = min;

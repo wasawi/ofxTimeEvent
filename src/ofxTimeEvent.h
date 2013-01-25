@@ -18,13 +18,13 @@
 class ofxTimeEventData
 {
 public:
-    int id;
+    int _id;
     bool isDispatched;
     uint result;
 //    EVENT_MODE mode;
     uint filter, curState;
     
-    ofxTimeEventData():hour(-1), minutes(-1), second(-1), isDispatched(false), filter(0), curState(0), result(false), id(0)
+    ofxTimeEventData():hour(-1), minutes(-1), second(-1), isDispatched(false), filter(0), curState(0), result(false), _id(0)
     {
     }
     
@@ -37,30 +37,38 @@ class ofxTimeEvent
 {
 public:
     ofEvent<ofxTimeEventData > eventData;
-    vector<ofxTimeEventData> datas;
-
+    
+    static ofxTimeEvent* getInstance()
+    {
+        static ofxTimeEvent instance;
+        return &instance;
+    }
+    
+    bool checkNow();
+    void registerHour ( const int& _id, const int& hour );
+    void registerMin ( const int& _id, const int& min );
+    void registerSec ( const int& _id, const int& sec );
+    void registerHourMin ( const int& _id, const int& hour, const int& min);
+    void registerMinSec ( const int& _id, const int& min, const int& sec);
+    void registerHourSec ( const int& _id, const int& hour, const int& sec);
+    void registerHourMinSec ( const int& _id, const int& hour, const int& min, const int& sec);
+    
+    void onUpdate(ofEventArgs& data) { update();}
+    void update();
+private:
+    
     ofxTimeEvent()
     {
         ofAddListener(ofEvents().update, this, &ofxTimeEvent::onUpdate);
     }
+    ofxTimeEvent(const ofxTimeEvent& rhs);
+    ofxTimeEvent& operator=(const ofxTimeEvent& rhs);
     
-    bool checkNow();
-    void registerHour ( int hour );
-    void registerMin ( int min );
-    void registerSec( int sec );
-    void registerHourMin( int hour, int min);
-    void registerMinSec( int min, int sec);
-    void registerHourSec( int hour, int sec);
-    void registerHourMinSec( int hour, int min, int sec);
-    
-    void onUpdate(ofEventArgs &data) { update();}
-    void update();
-private:
-    void registerTime( ofxTimeEventData data)
+    vector<ofxTimeEventData> datas;
+    void registerTime( const ofxTimeEventData& data)
     {
         datas.push_back(data);
     }
-    
 };
 
 
